@@ -7,7 +7,7 @@
     >
       <div
         class="customer-story-card-hero position-relative rounded-1"
-        style="background-image: url(https://i.imgur.com/Qjqgpr3.gif);"
+        :style="bgStyle"
       >
         <div
           class="customer-story-btn position-absolute top-0 right-0 mt-2 mr-2"
@@ -41,6 +41,40 @@
   </article>
 </template>
 
+<script>
+import { randomImage } from "../firebase";
+export default {
+  data() {
+    return {
+      imageURL: null,
+      isLoaded: false
+    };
+  },
+  computed: {
+    bgStyle() {
+      if (!this.imageURL) {
+        return null;
+      }
+      return {
+        backgroundImage: `url(${this.imageURL})`
+      };
+    }
+  },
+  created() {
+    this.getImage();
+  },
+  methods: {
+    async getImage() {
+      this.isLoaded = false;
+      const data = await randomImage();
+      if (data) {
+        this.imageURL = Object.values(data)[0].actualImageUrl;
+      }
+      this.isLoaded = true;
+    }
+  }
+};
+</script>
 <style lang="scss">
 .customer-story-card {
   box-shadow: 0 2px 4px rgba(27, 31, 35, 0.15);
