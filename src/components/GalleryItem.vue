@@ -9,14 +9,17 @@
         class="customer-story-card-hero position-relative rounded-1"
         :style="bgStyle"
       >
-        <div
+        <!-- <div
           class="customer-story-btn position-absolute top-0 right-0 mt-2 mr-2"
           role="button"
         >
           <span class="btn-mktg mx-auto py-2 px-3" role="button">
             <span class="f2">↗</span>
           </span>
-        </div>
+        </div> -->
+        <h4 class="loading-indicator" v-if="!isLoaded">
+          <span>Loading</span><span class="AnimatedEllipsis"></span>
+        </h4>
       </div>
 
       <div class="pt-3 d-flex flex-column flex-auto">
@@ -52,7 +55,7 @@ export default {
   },
   computed: {
     bgStyle() {
-      if (!this.imageURL) {
+      if (!this.imageURL || !this.isLoaded) {
         return null;
       }
       return {
@@ -83,5 +86,11 @@ export default {
   height: 200px;
   background-position: 50%;
   background-size: cover;
+}
+.loading-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>
