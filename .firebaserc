@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "lgtm-dev"
+    "default": "lgtm-dev",
+    "production": "lgtm-prod"
   }
 }

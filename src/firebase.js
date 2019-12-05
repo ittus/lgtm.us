@@ -3,14 +3,14 @@ import "firebase/firestore";
 
 // firebase init goes here
 const config = {
-  apiKey: "AIzaSyDN1gtbmdRioqBumUBICls4fVUmrLNAcSc",
-  authDomain: "lgtm-dev.firebaseapp.com",
-  databaseURL: "https://lgtm-dev.firebaseio.com",
-  projectId: "lgtm-dev",
-  storageBucket: "lgtm-dev.appspot.com",
-  messagingSenderId: "17035011926",
-  appId: "1:17035011926:web:37778d560d87f2959518f7"
+  apiKey: process.env.VUE_APP_FB_API_KEY,
+  authDomain: process.env.VUE_APP_FB_AUTH_DOMAIN,
+  databaseURL: process.env.VUE_APP_FB_DATABASE_URL,
+  projectId: process.env.VUE_APP_FB_PROJECT_ID,
+  storageBucket: process.env.VUE_APP_FB_PROJECT_ID,
+  appId: process.env.VUE_APP_FB_APP_ID
 };
+
 firebase.initializeApp(config);
 
 // firebase utils
