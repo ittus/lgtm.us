@@ -1,5 +1,8 @@
 <template>
   <div class="home">
+    <div class="flash flash-success">
+      Flash message goes here.
+    </div>
     <gallery class="mt-5" />
   </div>
 </template>

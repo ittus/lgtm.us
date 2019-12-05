@@ -34,7 +34,12 @@
         <div
           class="d-flex width-full f5 border-top flex-justify-between py-3 text-blue-mktg"
         >
-          <button class="btn" type="button">
+          <button
+            class="btn"
+            type="button"
+            @click="onCopy"
+            :disabled="!imageURL || !this.isLoaded"
+          >
             Copy
           </button>
           <span class="Bump-link-symbol"></span>
@@ -45,7 +50,10 @@
 </template>
 
 <script>
+import copy from "copy-to-clipboard";
 import { randomImage } from "../firebase";
+import { getMarkdown } from "../helpers/markdownGenerator";
+
 export default {
   data() {
     return {
@@ -74,6 +82,13 @@ export default {
         this.imageURL = Object.values(data)[0].actualImageUrl;
       }
       this.isLoaded = true;
+    },
+    onCopy() {
+      if (!this.imageURL) {
+        return;
+      }
+      const copyStr = getMarkdown(this.imageURL);
+      copy(copyStr);
     }
   }
 };
