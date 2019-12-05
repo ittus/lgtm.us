@@ -53,6 +53,7 @@
 import copy from "copy-to-clipboard";
 import { randomImage } from "../firebase";
 import { getMarkdown } from "../helpers/markdownGenerator";
+import { mapActions } from "vuex";
 
 export default {
   data() {
@@ -75,6 +76,7 @@ export default {
     this.getImage();
   },
   methods: {
+    ...mapActions("message", ["showMessage"]),
     async getImage() {
       this.isLoaded = false;
       const data = await randomImage();
@@ -89,6 +91,11 @@ export default {
       }
       const copyStr = getMarkdown(this.imageURL);
       copy(copyStr);
+      this.showMessage({
+        type: "success",
+        timeout: 5000,
+        message: "Copied to clipboard successfully!"
+      });
     }
   }
 };
