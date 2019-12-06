@@ -1,21 +1,34 @@
 <template>
   <div class="Header">
     <div class="Header-item">
-      <a href="#" class="Header-link f4 d-flex flex-items-center">
-        <!-- <%= octicon "mark-github", class: "mr-2", height: 32 %> -->
+      <router-link
+        tag="a"
+        class="Header-link f4 d-flex flex-items-center"
+        to="/"
+      >
         <img src="../assets/images/logo.png" class="img-logo" />
         <span>LGTM.US</span>
-      </a>
+      </router-link>
     </div>
+
     <!-- <div class="Header-item">
       <input type="search" class="form-control input-dark" />
     </div> -->
     <div class="Header-item Header-item--full"></div>
-    <div class="Header-item mr-0">
+    <div class="Header-item">
+      <router-link
+        tag="a"
+        class="Header-link f4 d-flex flex-items-center"
+        :to="{ name: 'how-to-use' }"
+      >
+        How to use
+      </router-link>
+    </div>
+    <!-- <div class="Header-item mr-0">
       <a href="/login" class="HeaderMenu-link no-underline mr-3">
         Sign&nbsp;in
       </a>
-    </div>
+    </div> -->
   </div>
 </template>
 
