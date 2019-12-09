@@ -23,10 +23,26 @@
 </template>
 
 <script>
+import firebase from "firebase";
+import { auth } from "@/firebase";
+
 export default {
   methods: {
     onSignInWithGithub() {
       console.log("sign in");
+      const provider = new firebase.auth.GithubAuthProvider();
+      auth
+        .signInWithPopup(provider)
+        .then(result => {
+          var user = result.user;
+          console.log(user);
+        })
+        .catch(error => {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          console.error(errorCode, errorMessage);
+        });
     }
   }
 };

@@ -24,7 +24,53 @@
         How to use
       </router-link>
     </div>
-    <div class="Header-item mr-0">
+    <div class="Header-item mr-0" v-if="isLoggedIn">
+      <div class="Header-item position-relative mr-0">
+        <details class="details-overlay details-reset">
+          <summary
+            class="Header-link"
+            aria-label="View profile and more"
+            aria-haspopup="menu"
+            role="button"
+          >
+            <img
+              alt="@ittus"
+              class="avatar"
+              :src="user.photoURL"
+              height="20"
+              width="20"
+            />
+            <span class="ml-1 dropdown-caret"></span>
+          </summary>
+          <div
+            class="dropdown-menu dropdown-menu-sw mt-2"
+            style="width: 180px"
+            role="menu"
+          >
+            <div class="header-nav-current-user css-truncate">
+              <a
+                role="menuitem"
+                class="no-underline user-profile-link px-3 pt-2 pb-2 mb-n2 mt-n1 d-block"
+                href="/ittus"
+                >Signed in as
+                <strong class="css-truncate-target">
+                  {{ user.displayName }}
+                </strong></a
+              >
+            </div>
+            <div role="none" class="dropdown-divider"></div>
+            <div
+              role="menuitem"
+              class="dropdown-item cursor-pointer"
+              @click="logOut"
+            >
+              Sign out
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+    <div class="Header-item mr-0" v-else>
       <router-link
         tag="a"
         to="/login"
@@ -36,6 +82,26 @@
   </div>
 </template>
 
+<script>
+import { mapGetters, mapState } from "vuex";
+import { auth } from "@/firebase";
+import { mapMutations } from "vuex";
+
+export default {
+  computed: {
+    ...mapState(["user"]),
+    ...mapGetters(["isLoggedIn"])
+  },
+  methods: {
+    ...mapMutations(["signOut"]),
+    logOut() {
+      auth.signOut().then(() => {
+        this.signOut();
+      });
+    }
+  }
+};
+</script>
 <style lang="scss">
 .HeaderMenu-link {
   color: #fff;
@@ -47,5 +113,15 @@
 .img-logo {
   width: 32px;
   margin-right: 0.5rem;
+}
+
+.details-overlay {
+  .Header-link {
+    outline: none !important;
+  }
+}
+
+.cursor-pointer:hover {
+  cursor: pointer;
 }
 </style>
