@@ -24,11 +24,15 @@
         How to use
       </router-link>
     </div>
-    <!-- <div class="Header-item mr-0">
-      <a href="/login" class="HeaderMenu-link no-underline mr-3">
+    <div class="Header-item mr-0">
+      <router-link
+        tag="a"
+        to="/login"
+        class="HeaderMenu-link no-underline border border-gray-dark rounded-1 px-2 py-1 mr-3"
+      >
         Sign&nbsp;in
-      </a>
-    </div> -->
+      </router-link>
+    </div>
   </div>
 </template>
 
