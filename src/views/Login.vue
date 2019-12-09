@@ -25,8 +25,24 @@
 <script>
 import firebase from "firebase";
 import { auth } from "@/firebase";
+import { mapGetters } from "vuex";
 
 export default {
+  computed: {
+    ...mapGetters(["isLoggedIn"])
+  },
+  created() {
+    if (this.isLoggedIn) {
+      this.$router.replace({ name: "home" });
+    }
+  },
+  watch: {
+    isLoggedIn() {
+      if (this.isLoggedIn) {
+        this.$router.replace({ name: "home" });
+      }
+    }
+  },
   methods: {
     onSignInWithGithub() {
       console.log("sign in");
