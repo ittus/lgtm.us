@@ -1,7 +1,11 @@
 <template>
-  <div class="text-center mt-5">
+  <div class="text-center">
+    <span class="Progress" v-show="isShowProgress">
+      <span class="bg-green" :style="{ width: progress + '%' }"></span>
+    </span>
     <vue2-dropzone
       ref="myVueDropzone"
+      class="mt-5"
       id="dropzone"
       :options="dropzoneOptions"
       :useCustomSlot="true"
@@ -32,7 +36,7 @@
 <script>
 import firebase from "firebase";
 import { storage, db } from "@/firebase";
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 import uuidv1 from "uuid/v1";
 import vue2Dropzone from "vue2-dropzone";
 import "vue2-dropzone/dist/vue2Dropzone.min.css";
@@ -45,6 +49,7 @@ export default {
     return {
       file: null,
       hash: "",
+      progress: 0,
       dropzoneOptions: {
         url: "/",
         thumbnailWidth: 250,
@@ -57,10 +62,15 @@ export default {
     };
   },
   computed: {
-    ...mapState(["user"])
+    ...mapState(["user"]),
+    isShowProgress() {
+      return this.progress > 0 && this.progress <= 100;
+    }
   },
   methods: {
     ...mapActions("message", ["showMessage"]),
+    ...mapMutations("message", ["clearMessage"]),
+
     chooseImage() {
       this.$refs.fileInput.click();
     },
@@ -82,10 +92,11 @@ export default {
       const that = this;
       uploadTask.on(
         "state_changed",
-        function(snapshot) {
-          var progress =
+        snapshot => {
+          const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           console.log("Upload is " + progress + "% done");
+          this.progress = progress;
           switch (snapshot.state) {
             case firebase.storage.TaskState.PAUSED: // or 'paused'
               console.log("Upload is paused");
@@ -105,7 +116,7 @@ export default {
             this.reset();
             this.showMessage({
               type: "success",
-              timeout: 5000,
+              timeout: 10000,
               message:
                 "Thank you for uploading! We will review the image as soon as possible."
             });
@@ -127,8 +138,13 @@ export default {
     },
     reset() {
       this.hash = "";
+      this.progress = 0;
       this.file = null;
       this.imageData = null;
+      this.$refs.myVueDropzone.removeAllFiles();
+    },
+    beforeDestroy() {
+      this.clearMessage();
     }
   }
 };
