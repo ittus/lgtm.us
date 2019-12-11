@@ -2,6 +2,9 @@
   <div id="app">
     <div class="content-wrap">
       <page-header />
+      <div class="flash flash-success" v-if="message">
+        {{ message }}
+      </div>
       <router-view />
     </div>
     <footer class="footer mt-6">
@@ -52,10 +55,13 @@
 
 <script>
 import PageHeader from "@/components/PageHeader.vue";
-
+import { mapState } from "vuex";
 export default {
   components: {
     PageHeader
+  },
+  computed: {
+    ...mapState("message", ["message", "type"])
   }
 };
 </script>

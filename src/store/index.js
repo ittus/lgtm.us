@@ -11,7 +11,7 @@ export default new Vuex.Store({
   mutations: {
     setUser(state, user) {
       if (!user) {
-        state.user = null
+        state.user = null;
       } else {
         state.user = {
           displayName: user.displayName,
@@ -20,7 +20,6 @@ export default new Vuex.Store({
           uid: user.uid
         };
       }
-
     },
     signOut(state) {
       state.user = null;

@@ -1,25 +1,26 @@
 <template>
-  <div>
-    <div
-      class="base-image-input"
-      :style="{ 'background-image': `url(${imageData})` }"
-      @click="chooseImage"
+  <div class="text-center mt-5">
+    <vue2-dropzone
+      ref="myVueDropzone"
+      id="dropzone"
+      :options="dropzoneOptions"
+      :useCustomSlot="true"
+      @vdropzone-file-added="onAddFile"
+      @vdropzone-removed-file="onRemoveFile"
     >
-      <span v-if="!imageData" class="placeholder">
-        Choose an Image
-      </span>
-      <input
-        class="file-input"
-        ref="fileInput"
-        type="file"
-        @input="onSelectFile"
-      />
-    </div>
+      <div class="dropzone-custom-content">
+        <h3 class="dropzone-custom-title">Drag and drop to upload content!</h3>
+        <div class="subtitle">
+          ...or click to select a file from your computer
+        </div>
+      </div>
+    </vue2-dropzone>
+
     <div>
       <button
-        class="btn ml-2"
+        class="btn ml-2 mt-3"
         type="button"
-        :disabled="!imageData"
+        :disabled="!file"
         @click="onUpload"
       >
         Upload
@@ -31,35 +32,46 @@
 <script>
 import firebase from "firebase";
 import { storage, db } from "@/firebase";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import uuidv1 from "uuid/v1";
+import vue2Dropzone from "vue2-dropzone";
+import "vue2-dropzone/dist/vue2Dropzone.min.css";
 
 export default {
+  components: {
+    vue2Dropzone
+  },
   data() {
     return {
-      imageData: null,
       file: null,
-      hash: ""
+      hash: "",
+      dropzoneOptions: {
+        url: "/",
+        thumbnailWidth: 250,
+        maxFilesize: 10,
+        autoProcessQueue: false,
+        maxFiles: 1,
+        addRemoveLinks: true,
+        acceptedFiles: "image/*"
+      }
     };
   },
   computed: {
     ...mapState(["user"])
   },
   methods: {
+    ...mapActions("message", ["showMessage"]),
     chooseImage() {
       this.$refs.fileInput.click();
     },
-    onSelectFile() {
-      const input = this.$refs.fileInput;
-      const files = input.files;
-      if (files && files[0]) {
-        this.file = files[0];
-        const reader = new FileReader();
-        reader.onload = e => {
-          this.imageData = e.target.result;
-        };
-        reader.readAsDataURL(files[0]);
+    onAddFile(file) {
+      if (this.file) {
+        this.$refs.myVueDropzone.removeFile(this.file);
       }
+      this.file = file;
+    },
+    onRemoveFile() {
+      this.file = null;
     },
     async onUpload() {
       this.hash = uuidv1();
@@ -87,15 +99,23 @@ export default {
           console.error(error);
         },
         () => {
-          uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+          uploadTask.snapshot.ref.getDownloadURL().then(async downloadURL => {
             console.log("File available at", downloadURL);
-            that.insertToDB(downloadURL);
+            await that.insertToDB(downloadURL);
+            this.reset();
+            this.showMessage({
+              type: "success",
+              timeout: 5000,
+              message:
+                "Thank you for uploading! We will review the image as soon as possible."
+            });
           });
         }
       );
     },
     async insertToDB(fileURL) {
-      db.ref("temp")
+      return db
+        .ref("temp")
         .child(this.hash)
         .set({
           actualImageUrl: fileURL,
@@ -115,29 +135,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.base-image-input {
-  display: block;
-  width: 200px;
-  height: 200px;
-  cursor: pointer;
-  background-size: cover;
-  background-position: center center;
+#dropzone {
+  position: relative;
+  background: white;
+  border-radius: 5px;
+  border: 2px dashed rgb(0, 135, 247);
+  border-image: none;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
 }
-.placeholder {
-  background: #f0f0f0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #333;
-  font-size: 18px;
-  font-family: Helvetica;
+
+.dropzone-custom-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
-.placeholder:hover {
-  background: #e0e0e0;
+
+.dropzone-custom-title {
+  margin-top: 0;
+  color: #00b782;
 }
-.file-input {
-  display: none;
+
+.subtitle {
+  color: #314b5f;
 }
 </style>
