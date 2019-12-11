@@ -19,9 +19,29 @@ const routes = [
   },
   {
     path: "/upload",
-    name: "upload",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Upload.vue")
+      import(/* webpackChunkName: "about" */ "../views/Upload.vue"),
+    meta: {
+      requiresAuth: true
+    },
+    children: [
+      {
+        path: "image",
+        name: "uploadImage",
+        component: () =>
+          import(/* webpackChunkName: "about" */ "../views/UploadImage.vue")
+      },
+      {
+        path: "uploadUrl",
+        name: "uploadUrl",
+        component: () =>
+          import(/* webpackChunkName: "about" */ "../views/UploadByUrl.vue")
+      },
+      {
+        path: "",
+        redirect: { name: "uploadImage" }
+      }
+    ]
   },
   {
     path: "/login",
@@ -41,7 +61,7 @@ router.beforeEach((to, from, next) => {
   const currentUser = auth.currentUser;
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
 
-  if (requiresAuth && !currentUser) next("login");
+  if (requiresAuth && !currentUser) next({ name: "login" });
   else next();
 });
 

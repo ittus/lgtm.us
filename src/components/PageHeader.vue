@@ -19,7 +19,7 @@
       <router-link
         tag="a"
         class="Header-link f4 d-flex flex-items-center"
-        :to="{ name: 'upload' }"
+        :to="{ name: 'uploadImage' }"
       >
         Upload
       </router-link>
@@ -57,15 +57,12 @@
             role="menu"
           >
             <div class="header-nav-current-user css-truncate">
-              <a
-                role="menuitem"
-                class="no-underline user-profile-link px-3 pt-2 pb-2 mb-n2 mt-n1 d-block"
-                href="/ittus"
-                >Signed in as
+              <div class="text-gray px-3 pt-2 pb-2 mb-n2 mt-n1">
+                Signed in as
                 <strong class="css-truncate-target">
                   {{ user.displayName }}
-                </strong></a
-              >
+                </strong>
+              </div>
             </div>
             <div role="none" class="dropdown-divider"></div>
             <div
@@ -106,6 +103,7 @@ export default {
     logOut() {
       auth.signOut().then(() => {
         this.signOut();
+        this.$router.push("/");
       });
     }
   }
