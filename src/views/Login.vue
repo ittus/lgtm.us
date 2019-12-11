@@ -45,7 +45,6 @@ export default {
   },
   methods: {
     onSignInWithGithub() {
-      console.log("sign in");
       const provider = new firebase.auth.GithubAuthProvider();
       auth
         .signInWithPopup(provider)

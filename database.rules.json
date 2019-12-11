@@ -1,0 +1,12 @@
+{
+  "rules": {
+    "images": {
+      ".read": "true",
+      ".write": "false"
+    },
+    "temp": {
+      ".read": "false",
+      ".write": "auth.uid != null"
+    }
+  }
+}

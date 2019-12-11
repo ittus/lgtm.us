@@ -10,13 +10,17 @@ export default new Vuex.Store({
   },
   mutations: {
     setUser(state, user) {
-      console.log(user);
-      state.user = {
-        displayName: user.displayName,
-        email: user.email,
-        photoURL: user.photoURL,
-        uid: user.uid
-      };
+      if (!user) {
+        state.user = null
+      } else {
+        state.user = {
+          displayName: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL,
+          uid: user.uid
+        };
+      }
+
     },
     signOut(state) {
       state.user = null;
