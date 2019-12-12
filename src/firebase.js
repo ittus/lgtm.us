@@ -18,7 +18,7 @@ const db = firebase.database();
 const auth = firebase.auth();
 const storage = firebase.storage();
 
-const IMAGE_NUM = 2900;
+const IMAGE_NUM = 4000;
 
 const randomImage = async () => {
   const found = false;
