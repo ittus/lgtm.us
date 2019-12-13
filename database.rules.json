@@ -2,10 +2,10 @@
   "rules": {
     "images": {
       ".read": "true",
-      ".write": "false"
+      ".write": "auth.uid != null && root.child('moderators').child(auth.uid).val() === true"
     },
     "temp": {
-      ".read": "false",
+      ".read": "auth.uid != null && root.child('moderators').child(auth.uid).val() === true",
       ".write": "auth.uid != null"
     }
   }

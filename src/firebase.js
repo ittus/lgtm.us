@@ -37,4 +37,21 @@ const randomImage = async () => {
   }
 };
 
-export { db, auth, randomImage, storage };
+const loadItemToReview = async () => {
+  const value = (await db.ref("temp").once("value")).val();
+  return value;
+};
+
+const getNextIndex = async () => {
+  const value = (
+    await db
+      .ref("images")
+      .orderByChild("index")
+      .limitToLast(1)
+      .once("value")
+  ).val();
+  const item = Object.values(value)[0];
+  return item.index + 1;
+};
+
+export { db, auth, randomImage, storage, loadItemToReview, getNextIndex };

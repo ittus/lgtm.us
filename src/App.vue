@@ -2,7 +2,7 @@
   <div id="app">
     <div class="content-wrap">
       <page-header />
-      <div class="flash flash-success" v-if="message">
+      <div class="flash" :class="`flash-${type}`" v-if="message">
         {{ message }}
       </div>
       <router-view />

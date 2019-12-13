@@ -3,7 +3,8 @@ import actions from "./actions";
 
 const state = () => ({
   message: "",
-  type: ""
+  type: "",
+  clearTimeout: null
 });
 
 export default {
