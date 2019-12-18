@@ -28,6 +28,15 @@
       <router-link
         tag="a"
         class="Header-link f4 d-flex flex-items-center"
+        :to="{ name: 'generate' }"
+      >
+        Generate
+      </router-link>
+    </div>
+    <div class="Header-item">
+      <router-link
+        tag="a"
+        class="Header-link f4 d-flex flex-items-center"
         :to="{ name: 'how-to-use' }"
       >
         How to use

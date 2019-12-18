@@ -13,7 +13,7 @@
       @vdropzone-removed-file="onRemoveFile"
     >
       <div class="dropzone-custom-content">
-        <h3 class="dropzone-custom-title">Drag and drop to upload content!</h3>
+        <h3 class="dropzone-custom-title">Drag and drop to upload!</h3>
         <div class="subtitle">
           ...or click to select a file from your computer
         </div>
@@ -157,7 +157,7 @@ export default {
   border-radius: 5px;
   border: 2px dashed rgb(0, 135, 247);
   border-image: none;
-  max-width: 500px;
+  max-width: 600px;
   margin-left: auto;
   margin-right: auto;
 }

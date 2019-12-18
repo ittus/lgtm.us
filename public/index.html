@@ -1,61 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-  <link rel="apple-touch-icon" sizes="180x180" href="<%= BASE_URL %>apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="<%= BASE_URL %>favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="<%= BASE_URL %>favicon-16x16.png">
-  <title>Look Good To Me</title>
-  <style>
-    .not-display {
-      display: none;
-    }
-
-
-    .not-display .loading {
-      height: 0;
-      width: 0;
-      padding: 15px;
-      border: 6px solid #ccc;
-      border-right-color: #888;
-      border-radius: 22px;
-      -webkit-animation: rotate 1s infinite linear;
-      /* left, top and position just for the demo! */
-      position: absolute;
-      left: 50%;
-      top: 50%;
-    }
-
-    @-webkit-keyframes rotate {
-
-      /* 100% keyframe for  clockwise.
-        use 0% instead for anticlockwise */
-      100% {
-        -webkit-transform: rotate(360deg);
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="<%= BASE_URL %>apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="<%= BASE_URL %>favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="<%= BASE_URL %>favicon-16x16.png" />
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:600,900&display=swap" rel="stylesheet" />
+    <title>Look Good To Me</title>
+    <style>
+      .not-display {
+        display: none;
       }
-    }
 
-    [v-cloak] {
-      display: block;
-    }
-  </style>
-</head>
+      .not-display .loading {
+        height: 0;
+        width: 0;
+        padding: 15px;
+        border: 6px solid #ccc;
+        border-right-color: #888;
+        border-radius: 22px;
+        -webkit-animation: rotate 1s infinite linear;
+        /* left, top and position just for the demo! */
+        position: absolute;
+        left: 50%;
+        top: 50%;
+      }
 
-<body>
-  <noscript>
-    <strong>We're sorry but LGTM.US doesn't work properly without JavaScript enabled. Please enable it to
-      continue.</strong>
-  </noscript>
-  <div id="app">
-    <div class="not-display" v-cloak>
-      <div class="loading"></div>
+      @-webkit-keyframes rotate {
+        /* 100% keyframe for  clockwise.
+        use 0% instead for anticlockwise */
+        100% {
+          -webkit-transform: rotate(360deg);
+        }
+      }
+
+      [v-cloak] {
+        display: block;
+      }
+    </style>
+  </head>
+
+  <body>
+    <noscript>
+      <strong
+        >We're sorry but LGTM.US doesn't work properly without JavaScript enabled. Please enable it to continue.</strong
+      >
+    </noscript>
+    <div id="app">
+      <div class="not-display" v-cloak>
+        <div class="loading"></div>
+      </div>
     </div>
-  </div>
-  <!-- built files will be auto injected -->
-</body>
-
+    <!-- built files will be auto injected -->
+  </body>
 </html>

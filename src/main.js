@@ -5,6 +5,7 @@ import store from "./store";
 import "./assets/styles/index.scss";
 import { auth } from "./firebase";
 import VueGtm from "vue-gtm";
+import VueKonva from "vue-konva";
 
 Vue.config.productionTip = false;
 
@@ -18,6 +19,8 @@ if (process.env.VUE_APP_GTM_ID) {
     trackOnNextTick: true
   });
 }
+
+Vue.use(VueKonva);
 
 let app;
 auth.onAuthStateChanged(user => {

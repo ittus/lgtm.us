@@ -44,8 +44,20 @@ const routes = [
     ]
   },
   {
+    path: "/generate",
+    name: "generate",
+    meta: {
+      requiresAuth: true
+    },
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Generate.vue")
+  },
+  {
     path: "/review",
     name: "review",
+    meta: {
+      requiresAuth: true
+    },
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Review.vue")
   },
