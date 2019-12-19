@@ -7,6 +7,8 @@
 
 ### 🏠 [Homepage](https://lgtm.us)
 
+[![screenshot](./images/screenshot.png)](https://lgtm.us)
+
 ## Install
 
 ```sh
