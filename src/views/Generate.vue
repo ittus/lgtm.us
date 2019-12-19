@@ -151,6 +151,13 @@ export default {
         };
         stage.position(newPos);
         stage.setAttrs(newPos);
+        if (imageWidth > imageHeight) {
+          // stage.height((imageHeight / imageWidth) * width);
+          this.stageConfig = {
+            width,
+            height: (imageHeight / imageWidth) * width
+          };
+        }
         stage.batchDraw();
       };
     },
