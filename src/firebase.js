@@ -1,5 +1,8 @@
-import firebase from "firebase";
+import firebase from "firebase/app";
 import "firebase/firestore";
+import "firebase/database";
+import "firebase/auth";
+import "firebase/storage";
 
 // firebase init goes here
 const config = {

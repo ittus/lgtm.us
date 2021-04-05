@@ -13,7 +13,7 @@
     "copy-to-clipboard": "^3.2.0",
     "core-js": "^3.4.3",
     "file-saver": "^2.0.2",
-    "firebase": "^7.5.0",
+    "firebase": "^8.3.2",
     "konva": "^4.0.18",
     "uuid": "^3.3.3",
     "vue": "^2.6.10",
