@@ -90,7 +90,6 @@ export default {
       this.renderPreview(this.imageURL);
     }
   },
-  created() { },
   mounted() {
     this.renderPreview(DEFAULT_URL);
   },
