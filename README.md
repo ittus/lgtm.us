@@ -1,7 +1,7 @@
 # Welcome to lgtm.us 👋
 [![Documentation](https://img.shields.io/badge/documentation-yes-brightgreen.svg)](https://github.com/ittus/lgtm.us)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
-[![Twitter: ittus\_fpt](https://img.shields.io/twitter/follow/ittus\_fpt.svg?style=social)](https://twitter.com/ittus\_fpt)
+[![Deploy to Firebase Hosting on merge](https://github.com/ittus/lgtm.us/actions/workflows/firebase-hosting-merge.yml/badge.svg?branch=master)](https://github.com/ittus/lgtm.us/actions/workflows/firebase-hosting-merge.yml)
 
 > Make code review great again
 
@@ -15,6 +15,9 @@
 npm install
 npm run serve
 ```
+
+## Architecture
+![architecture](./images/architecture.png)
 
 ## Author
 
